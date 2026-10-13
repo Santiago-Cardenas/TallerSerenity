@@ -1,0 +1,153 @@
+{
+  "requisitos": {
+    "HU-01": "Inicio de sesión con usuario y contraseña",
+    "HU-02": "Consulta del catálogo: búsqueda por nombre y filtro por categoría",
+    "HU-03": "Agregar productos al carrito respetando cantidades (1 a 5) y stock",
+    "HU-04": "Gestionar el carrito: actualizar cantidades y eliminar productos",
+    "HU-05": "Cupones de descuento (LUNA10, ELIXIR20, uno por compra)",
+    "HU-06": "Checkout: cálculo de IVA, envío y validación de datos de envío",
+    "HU-07": "Confirmación del pedido y descuento del stock"
+  },
+  "issues": [
+    {
+      "numero": 1,
+      "requisito": "HU-01",
+      "tipo": "smoke",
+      "feature": "src/test/resources/features/autenticacion/inicio_sesion.feature",
+      "titulo": "[UI][HU-01] Ingresar con credenciales válidas"
+    },
+    {
+      "numero": 2,
+      "requisito": "HU-01",
+      "tipo": "negativo",
+      "feature": "src/test/resources/features/autenticacion/inicio_sesion.feature",
+      "titulo": "[UI][HU-01] Rechazar el ingreso con credenciales inválidas"
+    },
+    {
+      "numero": 3,
+      "requisito": "HU-02",
+      "tipo": "positivo",
+      "feature": "src/test/resources/features/catalogo/consulta_catalogo.feature",
+      "titulo": "[UI][HU-02] Filtrar el catálogo por categoría"
+    },
+    {
+      "numero": 4,
+      "requisito": "HU-02",
+      "tipo": "positivo",
+      "feature": "src/test/resources/features/catalogo/consulta_catalogo.feature",
+      "titulo": "[UI][HU-02] Buscar productos por nombre sin importar mayúsculas"
+    },
+    {
+      "numero": 5,
+      "requisito": "HU-02",
+      "tipo": "negativo",
+      "feature": "src/test/resources/features/catalogo/consulta_catalogo.feature",
+      "titulo": "[UI][HU-02] Informar cuando ningún producto coincide con la búsqueda"
+    },
+    {
+      "numero": 6,
+      "requisito": "HU-03",
+      "tipo": "smoke",
+      "feature": "src/test/resources/features/carrito/agregar_al_carrito.feature",
+      "titulo": "[UI][HU-03] Agregar unidades de un producto disponible (valores límite 1 y 5)"
+    },
+    {
+      "numero": 7,
+      "requisito": "HU-03",
+      "tipo": "negativo",
+      "feature": "src/test/resources/features/carrito/agregar_al_carrito.feature",
+      "titulo": "[UI][HU-03] Rechazar cantidades fuera del rango 1 a 5"
+    },
+    {
+      "numero": 8,
+      "requisito": "HU-03",
+      "tipo": "negativo",
+      "feature": "src/test/resources/features/carrito/agregar_al_carrito.feature",
+      "titulo": "[UI][HU-03] No permitir más de 5 unidades acumuladas del mismo producto"
+    },
+    {
+      "numero": 9,
+      "requisito": "HU-03",
+      "tipo": "negativo",
+      "feature": "src/test/resources/features/carrito/agregar_al_carrito.feature",
+      "titulo": "[UI][HU-03] No permitir agregar más unidades que el stock disponible"
+    },
+    {
+      "numero": 10,
+      "requisito": "HU-03",
+      "tipo": "negativo",
+      "feature": "src/test/resources/features/carrito/agregar_al_carrito.feature",
+      "titulo": "[UI][HU-03] Un producto agotado no se puede agregar al carrito"
+    },
+    {
+      "numero": 11,
+      "requisito": "HU-04",
+      "tipo": "positivo",
+      "feature": "src/test/resources/features/carrito/gestionar_carrito.feature",
+      "titulo": "[UI][HU-04] Actualizar la cantidad de un producto en el carrito"
+    },
+    {
+      "numero": 12,
+      "requisito": "HU-04",
+      "tipo": "positivo",
+      "feature": "src/test/resources/features/carrito/gestionar_carrito.feature",
+      "titulo": "[UI][HU-04] Eliminar el único producto deja el carrito vacío"
+    },
+    {
+      "numero": 13,
+      "requisito": "HU-04",
+      "tipo": "negativo",
+      "feature": "src/test/resources/features/carrito/gestionar_carrito.feature",
+      "titulo": "[UI][HU-04] Rechazar una cantidad inválida al actualizar el carrito"
+    },
+    {
+      "numero": 14,
+      "requisito": "HU-05",
+      "tipo": "positivo",
+      "feature": "src/test/resources/features/cupones/cupones_descuento.feature",
+      "titulo": "[UI][HU-05] Aplicar cupones LUNA10 y ELIXIR20"
+    },
+    {
+      "numero": 15,
+      "requisito": "HU-05",
+      "tipo": "negativo",
+      "feature": "src/test/resources/features/cupones/cupones_descuento.feature",
+      "titulo": "[UI][HU-05] Rechazar cupones inválidos, vacíos o sin compra mínima"
+    },
+    {
+      "numero": 16,
+      "requisito": "HU-05",
+      "tipo": "negativo",
+      "feature": "src/test/resources/features/cupones/cupones_descuento.feature",
+      "titulo": "[UI][HU-05] Permitir un solo cupón por compra"
+    },
+    {
+      "numero": 17,
+      "requisito": "HU-05",
+      "tipo": "negativo",
+      "feature": "src/test/resources/features/cupones/cupones_descuento.feature",
+      "titulo": "[UI][HU-05] Retirar el cupón cuando la compra deja de cumplir el mínimo"
+    },
+    {
+      "numero": 18,
+      "requisito": "HU-06",
+      "tipo": "positivo",
+      "feature": "src/test/resources/features/pago/pago_pedido.feature",
+      "titulo": "[UI][HU-06] Calcular IVA, envío y total a pagar"
+    },
+    {
+      "numero": 19,
+      "requisito": "HU-06",
+      "tipo": "negativo",
+      "feature": "src/test/resources/features/pago/pago_pedido.feature",
+      "titulo": "[UI][HU-06] Impedir confirmar el pedido con datos de envío inválidos"
+    },
+    {
+      "numero": 20,
+      "requisito": "HU-07",
+      "tipo": "smoke",
+      "feature": "src/test/resources/features/pago/pago_pedido.feature",
+      "titulo": "[UI][HU-07] Confirmar un pedido válido y descontar el stock"
+    }
+  ]
+}

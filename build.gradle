@@ -1,0 +1,50 @@
+plugins {
+    id 'java'
+    id 'net.serenity-bdd.serenity-gradle-plugin' version '5.3.9'
+}
+
+group = 'com.icesi.botica'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+// Todas las dependencias de Serenity usan la misma versión
+def serenityVersion = '5.3.9'
+
+dependencies {
+    testImplementation "net.serenity-bdd:serenity-core:${serenityVersion}"
+    testImplementation "net.serenity-bdd:serenity-cucumber:${serenityVersion}"
+    testImplementation "net.serenity-bdd:serenity-screenplay:${serenityVersion}"
+    testImplementation "net.serenity-bdd:serenity-screenplay-webdriver:${serenityVersion}"
+    testImplementation "net.serenity-bdd:serenity-ensure:${serenityVersion}"
+
+    // Motor de Cucumber para JUnit Platform (misma versión de Cucumber que trae Serenity 5.3.9)
+    testImplementation 'io.cucumber:cucumber-junit-platform-engine:7.34.2'
+
+    // Motor JUnit Platform Suite alineado con la versión de JUnit que usa Serenity 5.3.9
+    testImplementation platform('org.junit:junit-bom:6.0.3')
+    testImplementation 'org.junit.platform:junit-platform-suite'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+test {
+    useJUnitPlatform()
+    systemProperties System.getProperties()   // propaga -Denvironment, -Dcucumber.filter.tags, etc.
+    systemProperty 'file.encoding', 'UTF-8'
+    outputs.upToDateWhen { false }            // las pruebas usan una aplicación externa: siempre se ejecutan
+    testLogging {
+        events 'passed', 'failed', 'skipped'
+        exceptionFormat 'full'
+    }
+    finalizedBy 'aggregate'                   // genera el reporte al terminar
+}
+
+clean {
+    delete 'target'
+}
