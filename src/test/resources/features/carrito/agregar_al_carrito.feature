@@ -11,7 +11,7 @@ Característica: Agregar productos al carrito
   Antecedentes:
     Dado que Merlín inició sesión en la botica
 
-  @Issue-6 @smoke @positivo
+  @Issue-5 @smoke @positivo
   Esquema del escenario: Agregar <cantidad> unidad(es) de un producto disponible
     Cuando Merlín agrega <cantidad> unidades de "<producto>" al carrito
     Entonces Merlín debería ver en el catálogo el mensaje "Se agregó <producto> al carrito"
@@ -23,7 +23,7 @@ Característica: Agregar productos al carrito
       | 5        | Raíz de Mandrágora       |
       | 2        | Poción de Sueño Profundo |
 
-  @Issue-7 @negativo
+  @Issue-6 @negativo
   Esquema del escenario: Rechazar una cantidad fuera del rango permitido: <cantidad>
     Cuando Merlín agrega <cantidad> unidades de "Polvo de Luna" al carrito
     Entonces Merlín debería ver en el catálogo el mensaje "La cantidad debe estar entre 1 y 5"
@@ -35,7 +35,7 @@ Característica: Agregar productos al carrito
       | 6        |
       | -1       |
 
-  @Issue-9 @negativo
+  @Issue-7 @negativo
   Escenario: No permitir agregar más unidades que el stock disponible
     Cuando Merlín agrega 2 unidades de "Pluma de Fénix" al carrito
     Entonces Merlín debería ver en el catálogo el mensaje "No hay suficiente stock disponible"

@@ -19,7 +19,7 @@ Característica: Consulta del catálogo de productos
       | Ingredientes | Raíz de Mandrágora, Polvo de Luna, Pluma de Fénix                      |
       | Amuletos     | Amuleto de Protección, Anillo de la Suerte, Colgante Lunar             |
 
-  @Issue-5 @negativo
+  @Issue-4 @negativo
   Escenario: Informar cuando ningún producto coincide con la búsqueda
     Cuando Merlín busca productos con el texto "dragón"
     Entonces Merlín debería ver el aviso "No se encontraron productos."

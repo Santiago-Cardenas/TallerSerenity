@@ -8,7 +8,7 @@ Característica: Cupones de descuento
   # Cupones vigentes: LUNA10 (10 %, sin mínimo) y ELIXIR20 (20 %, compra mínima de $100.000).
   # Solo se permite un cupón por compra.
 
-  @Issue-14 @positivo
+  @Issue-9 @positivo
   Esquema del escenario: Aplicar el cupón <cupon> a una compra que cumple sus condiciones
     Dado que Merlín tiene <cantidad> unidades de "<producto>" en el carrito
     Cuando Merlín aplica el cupón "<cupon>"
@@ -22,7 +22,7 @@ Característica: Cupones de descuento
       | LUNA10   | 2        | Poción de Sueño Profundo | -$3.700   | $33.300       |
       | ELIXIR20 | 3        | Elixir de Vitalidad      | -$25.200  | $100.800      |
 
-  @Issue-15 @negativo
+  @Issue-10 @negativo
   Esquema del escenario: Rechazar el cupón "<cupon>": <caso>
     Dado que Merlín tiene 2 unidades de "Elixir de Vitalidad" en el carrito
     Cuando Merlín aplica el cupón "<cupon>"
