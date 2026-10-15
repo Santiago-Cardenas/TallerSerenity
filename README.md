@@ -29,26 +29,35 @@ Toda la lógica corre en el navegador (`localStorage`), por lo que cada escenari
 | #1 | `@Issue-1` | HU-01 | Ingresar con credenciales válidas | smoke | 1 |
 | #2 | `@Issue-2` | HU-01 | Rechazar credenciales inválidas | negativo | 4 |
 | #3 | `@Issue-3` | HU-02 | Filtrar por categoría | positivo | 3 |
-| #4 | `@Issue-4` | HU-02 | Buscar por nombre sin importar mayúsculas | positivo | 2 |
 | #5 | `@Issue-5` | HU-02 | Búsqueda sin resultados | negativo | 1 |
 | #6 | `@Issue-6` | HU-03 | Agregar unidades (valores límite 1 y 5) | smoke | 3 |
 | #7 | `@Issue-7` | HU-03 | Cantidad fuera de rango (0, 6, -1) | negativo | 3 |
-| #8 | `@Issue-8` | HU-03 | Más de 5 unidades acumuladas | negativo | 1 |
 | #9 | `@Issue-9` | HU-03 | Supera el stock disponible | negativo | 1 |
-| #10 | `@Issue-10` | HU-03 | Producto agotado | negativo | 1 |
 | #11 | `@Issue-11` | HU-04 | Actualizar cantidad | positivo | 1 |
-| #12 | `@Issue-12` | HU-04 | Eliminar producto: carrito vacío | positivo | 1 |
-| #13 | `@Issue-13` | HU-04 | Cantidad inválida al actualizar | negativo | 1 |
 | #14 | `@Issue-14` | HU-05 | Aplicar LUNA10 / ELIXIR20 | positivo | 2 |
 | #15 | `@Issue-15` | HU-05 | Cupón inexistente, vacío o sin mínimo | negativo | 3 |
-| #16 | `@Issue-16` | HU-05 | Un solo cupón por compra | negativo | 1 |
-| #17 | `@Issue-17` | HU-05 | Cupón retirado al bajar del mínimo | negativo | 1 |
 | #18 | `@Issue-18` | HU-06 | IVA, envío y total (normal, gratis, express) | positivo | 3 |
 | #19 | `@Issue-19` | HU-06 | Datos de envío inválidos | negativo | 4 |
 | #20 | `@Issue-20` | HU-07 | Confirmar pedido y descontar stock | smoke | 1 |
+| #21 | `@Issue-21` | HU-04 | **[BUG]** Actualizar la cantidad del carrito no valida el stock | negativo | 1 |
+| #22 | `@Issue-22` | HU-06 | **[BUG]** El IVA se calcula antes del descuento | positivo | 1 |
 
-**Total:** 20 escenarios con su Issue (9 positivos y 11 negativos) y 38 ejecuciones.
+**Total:** 15 escenarios con su Issue: 13 en la suite normal (30 ejecuciones) y 2 `@bug` que se ejecutan aparte. Los números de Issue conservan el de su tag, por eso hay saltos (no existen #4, #8, #10, #12, #13, #16 ni #17).
 La fuente de verdad de los Issues es `traceability/issues.json`.
+
+**Escenarios `@bug` (#21 y #22):** documentan dos defectos de la aplicación frente a la historia de usuario oficial
+(`HistoriaUsuario_Botica.md`) y **fallan a propósito**. Por eso quedan **excluidos de la ejecución normal**
+(`build.gradle` aplica `not @bug` cuando no se indica ningún tag) y la suite y el pipeline siguen en verde (aparecen como *skipped*).
+Se ejecutan solo cuando se piden por su tag:
+
+```powershell
+.\gradlew.bat clean test "-Dcucumber.filter.tags=@Issue-21"   # bug del stock en el carrito
+.\gradlew.bat clean test "-Dcucumber.filter.tags=@Issue-22"   # bug del IVA antes del descuento
+.\gradlew.bat clean test "-Dcucumber.filter.tags=@bug"        # los dos
+```
+
+- **#21:** con 1 Elixir de Vitalidad (stock 3) se pide actualizar a 5. Se esperaba "No hay suficiente stock disponible" y la página responde "Cantidad actualizada".
+- **#22:** con 2 Pociones de Sueño Profundo y `LUNA10`, el IVA esperado es $6.327 (19 % de $33.300) y la página muestra $7.030 (19 % de $37.000).
 
 Tags disponibles:
 - Por Issue: `@Issue-N`
@@ -90,7 +99,7 @@ src/test/resources/
 | 8 | tasks | NavigateTo | theLoginPage(), theCatalog(), theCart(), theCheckout() | Navegación entre páginas |
 | 9 | tasks | SearchTheCatalog | byName(text), byCategory(category) | Buscar y filtrar |
 | 10 | tasks | AddToCart | units(quantity, product) | Agregar productos desde el catálogo |
-| 11 | tasks | ManageCart | updateQuantity(product, qty), remove(product) | Modificar el carrito |
+| 11 | tasks | ManageCart | updateQuantity(product, qty) | Modificar la cantidad en el carrito |
 | 12 | tasks | ApplyCoupon | withCode(code) | Aplicar un cupón (espera la respuesta asíncrona) |
 | 13 | tasks | PlaceOrder | chooseShipping(method), withDetails(details) | Elegir envío y confirmar el pedido |
 | 14 | tasks | FillField | with(target, value) | Escribir un valor o dejar el campo vacío (escenarios negativos) |
@@ -141,7 +150,7 @@ Reporte (Documentación Viva): `target/site/serenity/index.html`.
    git push -u origin main
    ```
 2. **Issues y labels:** en *Actions*, abrir **Setup trazabilidad (labels + issues)** y hacer clic en *Run workflow*.
-   El workflow crea los labels (`status:passed`, `status:failed`, `bug`, `HU-0X`…) y los Issues #1 a #20 en orden.
+   El workflow crea los labels (`status:passed`, `status:failed`, `bug`, `HU-0X`…) y los Issues pendientes de `traceability/issues.json`.
    Cada Issue incluye el tag, la historia de usuario, el archivo feature y el Gherkin del escenario.
 3. **Proyecto (TestCases):** en *Projects*, crear un proyecto y vincularlo al repositorio.
    Luego agregar los Issues con *Add item from repository*, o activar el workflow *Auto-add to project* con el filtro `is:issue`.

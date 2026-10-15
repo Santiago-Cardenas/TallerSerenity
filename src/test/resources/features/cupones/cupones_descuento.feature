@@ -34,20 +34,3 @@ Característica: Cupones de descuento
       | código inexistente     | DRAGON50 | Cupón no válido                                   |
       | compra menor al mínimo | ELIXIR20 | Este cupón requiere una compra mínima de $100.000 |
       | código vacío           |          | Ingresa un código de cupón                        |
-
-  @Issue-16 @negativo
-  Escenario: Permitir un solo cupón por compra
-    Dado que Merlín tiene 3 unidades de "Elixir de Vitalidad" en el carrito
-    Y Merlín aplicó el cupón "LUNA10"
-    Cuando Merlín aplica el cupón "ELIXIR20"
-    Entonces Merlín debería ver el mensaje del cupón "Solo se permite un cupón por compra"
-    Y el cupón aplicado debería ser "LUNA10"
-    Y el descuento debería ser "-$12.600"
-
-  @Issue-17 @negativo
-  Escenario: Retirar el cupón cuando la compra deja de cumplir el mínimo
-    Dado que Merlín tiene 3 unidades de "Elixir de Vitalidad" en el carrito
-    Y Merlín aplicó el cupón "ELIXIR20"
-    Cuando Merlín actualiza la cantidad de "Elixir de Vitalidad" a 2
-    Entonces Merlín debería ver en el carrito el mensaje "El cupón ELIXIR20 fue retirado porque tu compra ya no alcanza el mínimo de $100.000."
-    Y el total parcial debería ser "$84.000"

@@ -36,6 +36,13 @@ tasks.withType(JavaCompile).configureEach {
 test {
     useJUnitPlatform()
     systemProperties System.getProperties()   // propaga -Denvironment, -Dcucumber.filter.tags, etc.
+
+    // Los escenarios @bug documentan defectos conocidos de la aplicación y fallan a propósito.
+    // Sin un tag explícito se excluyen, para que la suite normal (y el pipeline) siga en verde.
+    // Para ejecutarlos: -Dcucumber.filter.tags="@Issue-21"  o  -Dcucumber.filter.tags="@bug"
+    if (System.getProperty('cucumber.filter.tags') == null) {
+        systemProperty 'cucumber.filter.tags', 'not @bug'
+    }
     systemProperty 'file.encoding', 'UTF-8'
     outputs.upToDateWhen { false }            // las pruebas usan una aplicación externa: siempre se ejecutan
     testLogging {

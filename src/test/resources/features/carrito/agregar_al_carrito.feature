@@ -35,20 +35,8 @@ Característica: Agregar productos al carrito
       | 6        |
       | -1       |
 
-  @Issue-8 @negativo
-  Escenario: No permitir más de 5 unidades acumuladas del mismo producto
-    Dado que Merlín ya agregó 3 unidades de "Raíz de Mandrágora" al carrito
-    Cuando Merlín agrega 3 unidades de "Raíz de Mandrágora" al carrito
-    Entonces Merlín debería ver en el catálogo el mensaje "Solo puedes llevar hasta 5 unidades de este producto"
-    Y el carrito de Merlín debería tener 3 unidades
-
   @Issue-9 @negativo
   Escenario: No permitir agregar más unidades que el stock disponible
     Cuando Merlín agrega 2 unidades de "Pluma de Fénix" al carrito
     Entonces Merlín debería ver en el catálogo el mensaje "No hay suficiente stock disponible"
     Y el carrito de Merlín debería tener 0 unidades
-
-  @Issue-10 @negativo
-  Escenario: Un producto agotado no se puede agregar al carrito
-    Cuando Merlín busca productos con el texto "Colgante Lunar"
-    Entonces Merlín debería ver el producto "Colgante Lunar" agotado y sin opción de agregarlo

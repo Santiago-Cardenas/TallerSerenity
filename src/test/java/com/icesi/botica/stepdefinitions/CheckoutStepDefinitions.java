@@ -29,6 +29,11 @@ public class CheckoutStepDefinitions {
         );
     }
 
+    @Cuando("{actor} procede al pago")
+    public void proceedsToCheckout(Actor actor) {
+        actor.attemptsTo(NavigateTo.theCheckout());
+    }
+
     @Cuando("{actor} elige el envío {string}")
     public void choosesShipping(Actor actor, String method) {
         actor.attemptsTo(PlaceOrder.chooseShipping(method));

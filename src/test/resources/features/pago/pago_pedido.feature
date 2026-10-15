@@ -43,3 +43,11 @@ Característica: Pago y confirmación del pedido
     Y el total pagado debería ser "$169.700"
     Y el carrito de Merlín debería tener 0 unidades
     Y Merlín debería ver 0 unidades disponibles de "Poción de Invisibilidad" en el catálogo
+
+  # HU Funcionalidad 3, criterio 5: el IVA se calcula sobre el subtotal DESPUÉS del descuento
+  @HU-06 @Issue-22 @bug @positivo
+  Escenario: Calcular el IVA sobre el subtotal con descuento
+    Dado que Merlín tiene 2 unidades de "Poción de Sueño Profundo" en el carrito
+    Y Merlín aplicó el cupón "LUNA10"
+    Cuando Merlín procede al pago
+    Entonces el resumen del pedido debería mostrar subtotal "$37.000", IVA "$6.327", envío "$8.000" y total "$47.627"

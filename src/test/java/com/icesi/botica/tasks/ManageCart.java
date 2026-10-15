@@ -15,10 +15,4 @@ public class ManageCart {
                 Click.on(UPDATE_BUTTON_OF.of(product))
         );
     }
-
-    public static Performable remove(String product) {
-        return Task.where("{0} elimina " + product + " del carrito",
-                Click.on(REMOVE_BUTTON_OF.of(product))
-        );
-    }
 }

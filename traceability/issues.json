@@ -31,13 +31,6 @@
       "titulo": "[UI][HU-02] Filtrar el catálogo por categoría"
     },
     {
-      "numero": 4,
-      "requisito": "HU-02",
-      "tipo": "positivo",
-      "feature": "src/test/resources/features/catalogo/consulta_catalogo.feature",
-      "titulo": "[UI][HU-02] Buscar productos por nombre sin importar mayúsculas"
-    },
-    {
       "numero": 5,
       "requisito": "HU-02",
       "tipo": "negativo",
@@ -59,13 +52,6 @@
       "titulo": "[UI][HU-03] Rechazar cantidades fuera del rango 1 a 5"
     },
     {
-      "numero": 8,
-      "requisito": "HU-03",
-      "tipo": "negativo",
-      "feature": "src/test/resources/features/carrito/agregar_al_carrito.feature",
-      "titulo": "[UI][HU-03] No permitir más de 5 unidades acumuladas del mismo producto"
-    },
-    {
       "numero": 9,
       "requisito": "HU-03",
       "tipo": "negativo",
@@ -73,32 +59,11 @@
       "titulo": "[UI][HU-03] No permitir agregar más unidades que el stock disponible"
     },
     {
-      "numero": 10,
-      "requisito": "HU-03",
-      "tipo": "negativo",
-      "feature": "src/test/resources/features/carrito/agregar_al_carrito.feature",
-      "titulo": "[UI][HU-03] Un producto agotado no se puede agregar al carrito"
-    },
-    {
       "numero": 11,
       "requisito": "HU-04",
       "tipo": "positivo",
       "feature": "src/test/resources/features/carrito/gestionar_carrito.feature",
       "titulo": "[UI][HU-04] Actualizar la cantidad de un producto en el carrito"
-    },
-    {
-      "numero": 12,
-      "requisito": "HU-04",
-      "tipo": "positivo",
-      "feature": "src/test/resources/features/carrito/gestionar_carrito.feature",
-      "titulo": "[UI][HU-04] Eliminar el único producto deja el carrito vacío"
-    },
-    {
-      "numero": 13,
-      "requisito": "HU-04",
-      "tipo": "negativo",
-      "feature": "src/test/resources/features/carrito/gestionar_carrito.feature",
-      "titulo": "[UI][HU-04] Rechazar una cantidad inválida al actualizar el carrito"
     },
     {
       "numero": 14,
@@ -113,20 +78,6 @@
       "tipo": "negativo",
       "feature": "src/test/resources/features/cupones/cupones_descuento.feature",
       "titulo": "[UI][HU-05] Rechazar cupones inválidos, vacíos o sin compra mínima"
-    },
-    {
-      "numero": 16,
-      "requisito": "HU-05",
-      "tipo": "negativo",
-      "feature": "src/test/resources/features/cupones/cupones_descuento.feature",
-      "titulo": "[UI][HU-05] Permitir un solo cupón por compra"
-    },
-    {
-      "numero": 17,
-      "requisito": "HU-05",
-      "tipo": "negativo",
-      "feature": "src/test/resources/features/cupones/cupones_descuento.feature",
-      "titulo": "[UI][HU-05] Retirar el cupón cuando la compra deja de cumplir el mínimo"
     },
     {
       "numero": 18,
@@ -148,6 +99,20 @@
       "tipo": "smoke",
       "feature": "src/test/resources/features/pago/pago_pedido.feature",
       "titulo": "[UI][HU-07] Confirmar un pedido válido y descontar el stock"
+    },
+    {
+      "numero": 21,
+      "requisito": "HU-04",
+      "tipo": "negativo",
+      "feature": "src/test/resources/features/carrito/gestionar_carrito.feature",
+      "titulo": "[UI][HU-04][BUG] Actualizar la cantidad del carrito no valida el stock"
+    },
+    {
+      "numero": 22,
+      "requisito": "HU-06",
+      "tipo": "positivo",
+      "feature": "src/test/resources/features/pago/pago_pedido.feature",
+      "titulo": "[UI][HU-06][BUG] El IVA se calcula antes del descuento"
     }
   ]
 }

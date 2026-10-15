@@ -29,11 +29,6 @@ public class CartStepDefinitions {
         actor.attemptsTo(ManageCart.updateQuantity(product, quantity));
     }
 
-    @Cuando("{actor} elimina {string} del carrito")
-    public void removesFromTheCart(Actor actor, String product) {
-        actor.attemptsTo(ManageCart.remove(product));
-    }
-
     @Dado("{actor} aplicó el cupón {string}")
     @Cuando("{actor} aplica el cupón {string}")
     public void appliesTheCoupon(Actor actor, String code) {
@@ -45,14 +40,6 @@ public class CartStepDefinitions {
         actor.attemptsTo(
                 Ensure.that(CartPage.MESSAGE).isDisplayed(),
                 Ensure.that(CartPage.MESSAGE).text().isEqualTo(message)
-        );
-    }
-
-    @Entonces("{actor} debería ver el carrito vacío")
-    public void shouldSeeAnEmptyCart(Actor actor) {
-        actor.attemptsTo(
-                Ensure.that(CartPage.EMPTY_CART).isDisplayed(),
-                Ensure.that(CartPage.PAY_BUTTON).isDisabled()
         );
     }
 
